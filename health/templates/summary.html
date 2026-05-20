@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Daily Summary</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: 0px 6px 15px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        h2 {
+            color: #444;
+        }
+
+        .main-layout {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .left-panel {
+            width: 90%;
+        }
+
+        .data {
+            font-size: 18px;
+            margin: 10px;
+            padding: 12px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+
+        .right-panel {
+            width: 90%;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 80%;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .status-good { color: green; }
+        .status-warning { color: orange; }
+        .status-bad { color: red; }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Today's Summary</h1>
+    <h2>Health Score: {{ score }}/100</h2>
+
+    <div class="main-layout">
+
+        <div class="left-panel">
+
+            <div class="data">🏋 Workout: {{ workout }} mins</div>
+            <div class="data">🍔 Calories: {{ calories }}</div>
+            <div class="data">😴 Sleep: {{ sleep }} hrs</div>
+
+            <div class="data">Sleep Status: {{ sleep_status }}</div>
+            <div class="data">Calorie Status: {{ calorie_status }}</div>
+            <div class="data">Workout Status: {{ workout_status }}</div>
+
+            <h2>{{ overall }}</h2>
+
+            <a href="/">
+                <button>⬅ Back</button>
+            </a>
+
+        </div>
+
+        <div class="right-panel">
+            <h3>Health Insights 📊</h3>
+            <canvas id="healthChart"></canvas>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const data = {
+    workout: Number("{{ workout|default:'0' }}"),
+    calories: Number("{{ calories|default:'0' }}"),
+    sleep: Number("{{ sleep|default:'0' }}")
+};
+
+const ctx = document.getElementById('healthChart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Workout', 'Calories', 'Sleep'],
+        datasets: [{
+            label: 'Daily Health Data',
+            data: [data.workout, data.calories, data.sleep],
+            backgroundColor: [
+                '#4CAF50',
+                '#2196F3',
+                '#FFC107'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
