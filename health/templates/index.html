@@ -115,7 +115,6 @@ button:hover {
 </div>
 
 <script>
-const baseURL = "http://127.0.0.1:8080";
 
 function showMessage(msg, type="success") {
     const status = document.getElementById("status");
@@ -126,7 +125,7 @@ function showMessage(msg, type="success") {
 function addWorkout() {
     let duration = document.getElementById("workout").value;
 
-    fetch(baseURL + "/add-workout/", {
+    fetch("/add-workout/", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ duration: duration })
@@ -142,7 +141,7 @@ function addWorkout() {
 function addMeal() {
     let calories = document.getElementById("meal").value;
 
-    fetch(baseURL + "/add-meal/", {
+    fetch("/add-meal/", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ calories: calories })
@@ -158,7 +157,7 @@ function addMeal() {
 function addSleep() {
     let hours = document.getElementById("sleep").value;
 
-    fetch(baseURL + "/add-sleep/", {
+    fetch("/add-sleep/", {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ hours: hours })
@@ -172,7 +171,7 @@ function addSleep() {
 
 // ✅ SUMMARY API
 function getSummary() {
-    fetch(baseURL + "/summary/")
+    fetch("/summary/")
     .then(response => response.json())
     .then(data => {
         document.getElementById("summary").innerHTML =
