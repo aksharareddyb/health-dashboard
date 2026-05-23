@@ -1,19 +1,7 @@
-# Python
+venv/
 __pycache__/
 *.pyc
-
-# Virtual environment
-venv/
-
-# Database
-db.sqlite3
-
-# Environment variables
-.env
-
-# Terraform
-.terraform/
-*.tfstate
-
-# OS files
-.DS_Store
+*.log
+node_modules/
+package-lock.json
+prometheus-data/
