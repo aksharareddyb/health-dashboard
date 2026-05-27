@@ -1,0 +1,2 @@
+[web]
+98.130.85.180 ansible_user=ubuntu ansible_ssh_private_key_file=~/akshara.key.pem
