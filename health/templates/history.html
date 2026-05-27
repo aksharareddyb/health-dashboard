@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>History</title>
+</head>
+<body>
+
+<h1>Health History</h1>
+
+<h3>Workouts</h3>
+<ul>
+{% for w in workouts %}
+    <li>{{ w.date }} - {{ w.duration }} mins</li>
+{% endfor %}
+</ul>
+
+<h3>Meals</h3>
+<ul>
+{% for m in meals %}
+    <li>{{ m.date }} - {{ m.calories }} cal</li>
+{% endfor %}
+</ul>
+
+<h3>Sleep</h3>
+<ul>
+{% for s in sleeps %}
+    <li>{{ s.date }} - {{ s.hours }} hrs</li>
+{% endfor %}
+</ul>
+
+<a href="/">⬅ Back</a>
+
+</body>
+</html>
